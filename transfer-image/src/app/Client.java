@@ -1,10 +1,12 @@
 package app;
 
-import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.net.Socket;
+
 import javax.imageio.ImageIO;
-import java.io.*;
-import java.awt.image.*;
-import java.net.*;
 
 public class Client{
   public static void main(String[] args) throws Exception{
@@ -18,13 +20,11 @@ public class Client{
       byte[] data = byteArrayOutputStream.toByteArray();
       byteArrayOutputStream.close();
 
-      OutputStream outputStream = socket.getOutputStream();
-      DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
+      DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
       dataOutputStream.writeInt(data.length);
       dataOutputStream.write(data, 0, data.length);
       System.out.println("Image Sent to Server");
       dataOutputStream.close();
-      outputStream.close();
     }
     catch(Exception exception){
       System.out.println("Exception" + exception.getMessage());

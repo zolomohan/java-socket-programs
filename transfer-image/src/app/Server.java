@@ -1,10 +1,16 @@
 package app;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.InputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.net.*;
-import java.io.*;
-import java.awt.image.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class Server {
 	public static void main(String[] args) throws Exception {
@@ -12,14 +18,12 @@ public class Server {
 		System.out.println("Waiting For Client");
 		Socket socket = server.accept();
 		System.out.println("Client Connected");
-		InputStream inputStream = socket.getInputStream();
-		DataInputStream dataInputStream = new DataInputStream(inputStream);
+		DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
 		int length = dataInputStream.readInt();
 		System.out.println("Image Size " + length / 1024 + "KB");
 		byte[] data = new byte[length];
 		dataInputStream.readFully(data);
 		dataInputStream.close();
-		inputStream.close();
 
 		InputStream ian = new ByteArrayInputStream(data);
 		BufferedImage image = ImageIO.read(ian);
