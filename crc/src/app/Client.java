@@ -7,9 +7,9 @@ public class Client{
   public static void main(String[] args) throws Exception{
     Socket socket = new Socket("localhost", 3000);
     Scanner keyScan = new Scanner(System.in);
-    Scanner scanner = new Scanner(socket.getInputStream());
+    Scanner socketScann = new Scanner(socket.getInputStream());
 
-    String message = scanner.nextLine();
+    String message = socketScann.nextLine();
     System.out.print("Enter CRC: ");
     String crc = keyScan.nextLine();
 
@@ -23,5 +23,8 @@ public class Client{
 
     if(encoded.substring(encoded.length() - crc.length()+1).equals("000")) System.out.println("No Error");
     else System.out.println("Error");
+    socket.close();
+    keyScan.close();
+    socketScann.close();
   }
 }

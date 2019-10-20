@@ -30,6 +30,9 @@ public class Server{
       for(; i < encoded.length() && encoded.charAt(i) != '1'; i++);
     }
     output.println(message + encoded.substring(encoded.length() - crc.length()+1));
-    // System.out.println(message + encoded.substring(encoded.length() - crc.length()+1));
+    keyScan.close();
+    socketScan.close();
+    socket.close();
+    serverSocket.close();
   }
 }
