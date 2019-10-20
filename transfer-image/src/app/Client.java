@@ -13,7 +13,7 @@ public class Client{
     Socket socket = new Socket("localhost", 4000);
     System.out.println("Client is Running");
     try{
-      BufferedImage image = ImageIO.read(new File("D:/Pictures/Camera Roll/IMG_20180913_164515.jpg"));
+      BufferedImage image = ImageIO.read(new File("D:/image.jpg"));
       ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
       ImageIO.write(image, "jpg", byteArrayOutputStream);
       byteArrayOutputStream.flush();
